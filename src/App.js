@@ -5,15 +5,30 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route
-          path="/character-detail/:characterId"
-          element={<CharacterDetailPage />}
+    <div>
+      <img
+        alt="asd"
+        src="https://github.com/hautest/marvelAPI/blob/master/src/aaa.png"
+      />
+      <header className="marvelLogo">
+        <img
+          width="300px"
+          alt="마블로고"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/800px-Marvel_Logo.svg.png"
         />
-      </Routes>
-    </BrowserRouter>
+      </header>
+      <main>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route
+              path="/character-detail/:characterId"
+              element={<CharacterDetailPage />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </main>
+    </div>
   );
 }
 

@@ -1,23 +1,29 @@
-import React from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import "./CharactersList.css";
 
-function CharactersList({ apiData }) {
-  console.log(apiData);
+const CharactersListItem = memo(({ data }) => {
   return (
-    <div>
+    <Link className="characterLsitName" to={`/character-detail/${data.id}`}>
+      <li className="characterLsitImgNameBox" key={data.id}>
+        <img
+          className="characterLsitImg"
+          alt={data.name}
+          src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
+        />
+        {data.name}
+      </li>
+    </Link>
+  );
+});
+
+function CharactersList({ apiData }) {
+  return (
+    <ul className="charactersListDisplay">
       {apiData.map((data) => (
-        <div key={data.id}>
-          <img
-            alt="사진없음"
-            width="100px"
-            height="100px"
-            src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
-          />
-          <Link to={`/character-detail/${data.id}`}>{data.name}</Link>
-        </div>
+        <CharactersListItem key={data.id} data={data} />
       ))}
-    </div>
+    </ul>
   );
 }
 

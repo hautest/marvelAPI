@@ -1,0 +1,14 @@
+.buttonBox {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  margin-bottom: 5%;
+}
+
+button {
+  font-size: 30px;
+  border: none;
+  color: red;
+  background-color: white;
+  cursor: pointer;
+}
