@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./CharactersList.css";
 
 const CharactersListItem = memo(({ data }) => {
@@ -17,10 +18,11 @@ const CharactersListItem = memo(({ data }) => {
   );
 });
 
-function CharactersList({ apiData }) {
+function CharactersList() {
+  const marvelList = useSelector((state) => state.marvelList.list);
   return (
     <ul className="charactersListDisplay">
-      {apiData.map((data) => (
+      {marvelList.map((data) => (
         <CharactersListItem key={data.id} data={data} />
       ))}
     </ul>

@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import { Button } from "./Button";
 import "./Paging.css";
 
-function Paging({ handlePageChange, page, maxPage }) {
+function Paging({ handlePageChange, page }) {
+  const maxPage = useSelector((state) => state.marvelList.maxPage);
   return (
     <div className="buttonBox">
       <button onClick={() => handlePageChange(1)}>&lt;&lt;</button>
@@ -13,7 +15,11 @@ function Paging({ handlePageChange, page, maxPage }) {
         handlePageChange={handlePageChange}
         maxPage={maxPage}
       />
-      <button onClick={() => handlePageChange(page < 170 ? page + 5 : maxPage)}>
+      <button
+        onClick={() =>
+          handlePageChange(page < maxPage - 4 ? page + 5 : maxPage)
+        }
+      >
         &gt;
       </button>
       <button onClick={() => handlePageChange(maxPage)}>&gt;&gt;</button>

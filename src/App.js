@@ -6,10 +6,6 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <img
-        alt="asd"
-        src="https://github.com/hautest/marvelAPI/blob/master/src/aaa.png"
-      />
       <header className="marvelLogo">
         <img
           width="300px"

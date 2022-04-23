@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { CharactersList } from "../components/CharactersList";
 import { Paging } from "../components/Paging";
-import { getMarvelCharacterList } from "../api/getMarvelCharacterList";
-import { getMarvelDataTotal } from "../api/getMarvelDataTotal";
+import { useDispatch } from "react-redux";
+import { getMarvelList } from "../store/slice";
 
 const LIMIT = 9;
 
 function MainPage() {
-  const [apiData, setApiData] = useState([]);
-  const [total, setTotal] = useState();
-  const maxPage = Math.ceil(total / LIMIT);
+  const dispatch = useDispatch();
+
   const [page, setPage] = useState(1);
   const offset = (page - 1) * LIMIT;
 
@@ -18,27 +17,13 @@ function MainPage() {
   };
 
   useEffect(() => {
-    getMarvelDataTotal().then((res) => {
-      setTotal(res);
-    });
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
-      const { results } = await getMarvelCharacterList(offset);
-      setApiData(results);
-    };
-    getData();
-  }, [offset]);
+    dispatch(getMarvelList(offset));
+  }, [offset, dispatch]);
 
   return (
     <div>
-      <CharactersList apiData={apiData} />
-      <Paging
-        handlePageChange={handlePageChange}
-        page={page}
-        maxPage={maxPage}
-      />
+      <CharactersList />
+      <Paging handlePageChange={handlePageChange} page={page} />
     </div>
   );
 }

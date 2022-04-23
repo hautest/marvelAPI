@@ -1,18 +1,17 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { getMarvelCharacterDetail } from "../../api/getMarvelCharacterDetail";
+import { useSelector, useDispatch } from "react-redux";
 import ShowCharacterWork from "./ShowCharacterWork";
+import { getMarvelDetail } from "../../store/slice";
 import "./CharacterDetailPage.css";
 
 function CharacterDetailPage() {
-  const [data, setData] = useState();
+  const data = useSelector((state) => state.marvelDetail.detail);
+  const dispatch = useDispatch();
   const { characterId } = useParams();
-
   useEffect(() => {
-    getMarvelCharacterDetail(characterId).then((res) => {
-      setData(res.results[0]);
-    });
-  }, [characterId]);
+    dispatch(getMarvelDetail(characterId));
+  }, [characterId, dispatch]);
 
   if (!data) return null;
 
@@ -26,7 +25,6 @@ function CharacterDetailPage() {
     { work: storiesArr, title: "STORIES" },
   ];
 
-  console.log(data);
   return (
     <div className="characterInformationBox">
       <img
